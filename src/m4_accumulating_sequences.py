@@ -3,33 +3,26 @@ This module lets you practice BUILDING-UP a new SEQUENCE,
 one item at a time, using the ACCUMULATOR pattern.
   -- We will later see a more efficient way to build-up and/or modify
         sequences, namely by MUTATING their elements.
-
 Authors: David Mutchler, Dave Fisher, Valerie Galluzzi, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Zhengxiao Zou
+"""  # Done: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
 
 def main():
     """ Calls the various   TEST   functions in this module. """
-    run_test_make_simple_list()
-    run_test_make_simple_string()
-    run_test_make_less_simple_string()
-
-    # ------------------------------------------------------------------
-    # TODO: 8. Uncomment the tests below before working TO DO 9.
-    #   They launch annoying rg.RoseWindows on each run that you don't want
-    #   until you get to TO DO 9 and 10.
-    # ------------------------------------------------------------------
-    # run_test_draw_shapes()
-    # run_test_rectangles_from_circles()
+    test_make_simple_list()
+    test_make_simple_string()
+    test_make_less_simple_string()
+    test_draw_shapes()
+    test_rectangles_from_circles()
 
 
-def run_test_make_simple_list():
+def test_make_simple_list():
     """ Tests the   make_simple_list    function. """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement this TEST function.
+    # Done: 2. Implement this TEST function.
     #   It TESTS the  make_simple_list  function defined below.
     #   Include at least **   2   ** tests.
     #
@@ -47,6 +40,10 @@ def run_test_make_simple_list():
     print('Actual:  ', actual)
 
     # Test 2 (add your test here):
+    expected = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+    actual = make_simple_list(5, 14)
+    print('Expected:', expected)
+    print('Actual:  ', actual)
 
 
 def make_simple_list(m, n):
@@ -60,23 +57,26 @@ def make_simple_list(m, n):
     Examples:
       If m is 5 and n is 13, then this function returns:
         [5, 6, 7, 8, 9, 10, 11, 12, 13]
-
       If m and n are both 205, then this function returns:  [205]
-
     Type hints:
       :type m: int
       :type n: int
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # Done: 3. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # ------------------------------------------------------------------
+    sequence = []
+    for k in range(m, n + 1):
+        sequence = sequence + [k]
+
+    return sequence
 
 
-def run_test_make_simple_string():
+def test_make_simple_string():
     """ Tests the   make_simple_string    function. """
     # ------------------------------------------------------------------
-    # TODO: 4. Implement this TEST function.
+    # Done: 4. Implement this TEST function.
     #   It TESTS the  make_simple_string  function defined below.
     #   Include at least **   2   ** tests.
     #
@@ -86,6 +86,18 @@ def run_test_make_simple_string():
     print('--------------------------------------------------')
     print('Testing the   make_simple_string   function:')
     print('--------------------------------------------------')
+
+    # Test 1:
+    expected = '5-6-7-8-9-10-11-12-13-'
+    actual = make_simple_string(5, 13)
+    print('Expected:', expected)
+    print('Actual:  ', actual)
+
+    # Test 2:
+    expected = '205-'
+    actual = make_simple_string(205, 205)
+    print('Expected:', expected)
+    print('Actual:  ', actual)
 
 
 def make_simple_string(m, n):
@@ -101,20 +113,23 @@ def make_simple_string(m, n):
     Examples:
       If m is 5 and n is 13, then this function returns:
         '5-6-7-8-9-10-11-12-13-'
-
       If m and n are both 205, then this function returns:  '205-'
-
     Type hints:
       :type m: int
       :type n: int
     """
     # ------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
+    # Done: 5. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # ------------------------------------------------------------------
+    sequence = ''
+    for k in range(m, n + 1):
+
+        sequence = sequence + str(k) + '-'
+    return sequence
 
 
-def run_test_make_less_simple_string():
+def test_make_less_simple_string():
     """ Tests the   make_less_simple_string    function. """
     # ------------------------------------------------------------------
     # TODO: 6. Implement this TEST function.
@@ -127,7 +142,17 @@ def run_test_make_less_simple_string():
     print('--------------------------------------------------')
     print('Testing the   make_less_simple_string   function:')
     print('--------------------------------------------------')
+    # Test 1:
+    expected = '5-6-7-8-9-10-11-12-13'
+    actual = make_less_simple_string(5, 13)
+    print('Expected:', expected)
+    print('Actual:  ', actual)
 
+    # Test 2:
+    expected = '5-6-7-8-9-10-11-12-13'
+    actual = make_less_simple_string(5, 13)
+    print('Expected:', expected)
+    print('Actual:  ', actual)
 
 def make_less_simple_string(m, n):
     """
@@ -144,9 +169,7 @@ def make_less_simple_string(m, n):
     Examples:
       If m is 5 and n is 13, then this function returns:
         '5-6-7-8-9-10-11-12-13'
-
       If m and n are both 205, then this function returns:  '205'
-
     Type hints:
       :type m: int
       :type n: int
@@ -155,9 +178,17 @@ def make_less_simple_string(m, n):
     # TODO: 7. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # -----------------------------------------------------------------
+    sequence1 = ''
+    l2 = ''
+    for k in range(m, n + 1):
+        sequence1 = sequence1 + str(k) + '-'
+    for i in range(len(sequence1) - 1):
+        l2 = l2 + sequence1[i]
+    return l2
 
 
-def run_test_draw_shapes():
+
+def test_draw_shapes():
     """ Tests the   draw_shapes    function. """
     print()
     print('-----------------------------------------------------------')
@@ -222,32 +253,37 @@ def draw_shapes(shapes, window):
     Side effects:
       See   draw_shapes.pdf   in this project for pictures
       that may help you better understand the following:
-
       For each rg.Shape in the given sequence of rg.Shape objects,
         1. Attaches the rg.Shape to the given rg.RoseWindow.
         2. Renders the rg.RoseWindow with a 0.3 second delay
              after the render.
-
     Examples:
       See the   draw_shapes.pdf   file in this project.
     Type hints:
-      :type shapes:  list | tuple of rg._Shape
+      :type shapes:  list[rg.Shape]    or tuple(rg.Shape)
       :type window:  rg.RoseWindow
     """
     # ------------------------------------------------------------------
-    # TODO: 9. Implement and test this function. Make sure you do TO DO 8 in main first!
-    #     The testing code is already written for you (that you just enabled in TO DO 8).
+    # Done: 8. Implement and test this function.
+    #     The testing code is already written for you (above).
     #
     ####################################################################
     # IMPORTANT: the same
     #    attach_to
     # method works for ALL the rosegraphics shapes!
+    # The DOT trick is unaware of this fact, but it WILL work - try it!
     # FWIW: The word for ideas like this is "polymorphism".
     ####################################################################
     # ------------------------------------------------------------------
+    for k in range(len(shapes)):
+        shapes[k].attach_to(window)
+    window.render(0.3)
 
 
-def run_test_rectangles_from_circles():
+
+
+
+def test_rectangles_from_circles():
     """ Tests the   rectangles_from_circles    function. """
     print()
     print('-----------------------------------------------------------')
@@ -333,20 +369,19 @@ def rectangles_from_circles(circles):
     """
     See   rectangles_from_circles.pdf   in this project for pictures
     that may help you better understand the following specification:
-
     What comes in:
       -- a sequence of rg.Circle objects
     What goes out:
-      Returns a list of rg.Rectangles, where each rg.Rectangle circumscribes
-      its corresponding rg.Circle in the given list of rg.Circles.
+      Returns a list of rg.Rectangles, where each rg.Rectangle
+      circumscribes its corresponding rg.Circle in the given list
+      of rg.Circles.
     Side effects: None.
     Examples: See   rectangles_from_circles.pdf   in this project.
     Type hints:
-      :type circles:  list | tuple of rg.Circle
-      :rtype: list of rg.Rectangles
+      :type circles:  list[rg.Circle]    or tuple(rg.Circle)
     """
     # ------------------------------------------------------------------
-    # TODO: 10. Implement and test this function.
+    # Done: 9. Implement and test this function.
     #     The testing code is already written for you (above).
     #
     ####################################################################
@@ -357,6 +392,15 @@ def rectangles_from_circles(circles):
     #            in this function, so DON'T draw anything in here!
     ####################################################################
     # ------------------------------------------------------------------
+    sequence = []
+    for k in circles:
+        x1 = k.center.x
+        y1 = k.center.y
+        r = k.radius
+        rectangle = rg.Rectangle(rg.Point(x1 + r, y1 + r), rg.Point(x1 - r, y1 - r))
+        sequence = sequence + [rectangle]
+    return sequence
+
 
 
 # ----------------------------------------------------------------------
